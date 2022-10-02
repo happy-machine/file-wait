@@ -23,3 +23,6 @@ Folder to watch for new files/folders.
 
 **FILE_SENSOR_DELAY**=200
 Time to wait in seconds after arrival of a file / folder before quitting with zero exit code.
+
+**RECURSIVE_MODE**=True  
+Notify of recursive events (events inside folders recursively), defaults to false

@@ -53,8 +53,15 @@ fn main() -> Result<()> {
       }
     }
   })?;
+  let RECURSIVE_MODE =
+    env::var("RECURSIVE_MODE").unwrap_or("false".to_string());
+  let recursive_mode: bool = RECURSIVE_MODE.parse().unwrap();
+  if recursive_mode {
+    watcher.watch(Path::new(&REQUEST_SENSOR_PATH), RecursiveMode::Recursive)?;
+  } else {
+    watcher.watch(Path::new(&REQUEST_SENSOR_PATH), RecursiveMode::NonRecursive)?;
+  }
 
-  watcher.watch(Path::new(&REQUEST_SENSOR_PATH), RecursiveMode::Recursive)?;
   let mut file_total = 0;
   loop {
       let now = time::Instant::now();
